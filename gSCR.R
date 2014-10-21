@@ -41,7 +41,12 @@ gSCR <- function(parm, y = y, K = NULL, Xdata = trapdata, Gdata = NULL,
                  model="B", sex = NULL, sex.on = c("n","int","sig","b"), predict=FALSE,
                  cov=NULL, directions=8){
 
-  sex <- sex + 1
+  if(!is.null(sex)){
+    sex <- sex + 1
+  }
+  if(is.null(sex)){
+    sex <- rep(1,nrow(y))
+  }
   X <- as.matrix(Xdata[,c("X","Y")])
   G <- as.matrix(Gdata[,c("X","Y")])
   nG <- nrow(G)
